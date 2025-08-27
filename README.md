@@ -46,61 +46,36 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 The Surprise Travel Planning Crew offers multiple ways to run and interact with the system. All commands support cost optimization by reusing existing analysis files when available.
 
-### 🚀 Basic Execution
-
-To start your surprise travel planning crew with the default configuration:
-
-```bash
-$ crewai run
-```
-
-Or use the Python module directly:
-
-```bash
-$ python -m src.travel_surprise_crew.main run
-```
-
 ### 📋 Available Commands
 
-#### **run** - Execute Travel Planning
+#### **UV Scripts (Recommended)**
 
 ```bash
-# Run with default travel scenario (couple from Kosice)
-$ python -m src.travel_surprise_crew.main run
+# Main execution commands
+$ uv run travel_surprise_crew    # Run with default scenario
+$ uv run run_crew               # Alternative run command
+$ uv run list_inputs            # View available scenarios
+$ uv run train                  # Train the crew
+$ uv run test                   # Test crew performance
+```
 
+#### **Advanced Options (if needed)**
+
+```bash
 # Run with specific travel scenario
-$ python -m src.travel_surprise_crew.main run solo_adventure
-$ python -m src.travel_surprise_crew.main run family_vacation
-$ python -m src.travel_surprise_crew.main run luxury_romantic
-$ python -m src.travel_surprise_crew.main run business_weekend
-```
+$ uv run python -m src.travel_surprise_crew.main run solo_adventure
+$ uv run python -m src.travel_surprise_crew.main run family_vacation
+$ uv run python -m src.travel_surprise_crew.main run luxury_romantic
+$ uv run python -m src.travel_surprise_crew.main run business_weekend
 
-#### **inputs** - View Available Travel Scenarios
+# Train with custom parameters
+$ uv run python -m src.travel_surprise_crew.main train <n_iterations> <filename>
 
-```bash
-# List all available travel input configurations
-$ python -m src.travel_surprise_crew.main inputs
-```
+# Test with custom parameters
+$ uv run python -m src.travel_surprise_crew.main test <n_iterations> <eval_llm>
 
-#### **train** - Train the Crew
-
-```bash
-# Train the crew with specified iterations and output file
-$ python -m src.travel_surprise_crew.main train <n_iterations> <filename>
-```
-
-#### **test** - Test Crew Performance
-
-```bash
-# Test the crew with evaluation metrics
-$ python -m src.travel_surprise_crew.main test <n_iterations> <eval_llm>
-```
-
-#### **replay** - Replay Previous Execution
-
-```bash
-# Replay a specific task from previous execution
-$ python -m src.travel_surprise_crew.main replay <task_id>
+# Replay specific task
+$ uv run python -m src.travel_surprise_crew.main replay <task_id>
 ```
 
 ### 🎭 Travel Scenarios

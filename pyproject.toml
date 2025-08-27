@@ -9,11 +9,12 @@ dependencies = [
 ]
 
 [project.scripts]
-travel_surprise_crew = "travel_surprise_crew.main:run"
-run_crew = "travel_surprise_crew.main:run"
-train = "travel_surprise_crew.main:train"
-replay = "travel_surprise_crew.main:replay"
-test = "travel_surprise_crew.main:test"
+travel_surprise_crew = "src.travel_surprise_crew.main:run_default"
+run_crew = "src.travel_surprise_crew.main:run_default"
+train = "src.travel_surprise_crew.main:train_default"
+replay = "src.travel_surprise_crew.main:replay_default"
+test = "src.travel_surprise_crew.main:test_default"
+list_inputs = "src.travel_surprise_crew.main:list_inputs"
 
 [build-system]
 requires = ["hatchling"]

@@ -135,6 +135,42 @@ def test():
         raise Exception(f"An error occurred while testing the crew: {e}")
 
 
+# Wrapper functions for project.scripts (no arguments needed)
+def run_default():
+    """Wrapper function for project.scripts - runs with default input"""
+    return run("default")
+
+def train_default():
+    """Wrapper function for project.scripts - trains with default parameters"""
+    try:
+        user_input = get_input("training")
+        inputs = {"user_input": user_input}
+        TravelSurpriseAi().crew().train(n_iterations=2, filename="training_output.json", inputs=inputs)
+    except Exception as e:
+        raise Exception(f"An error occurred while training the crew: {e}")
+
+def test_default():
+    """Wrapper function for project.scripts - tests with default parameters"""
+    try:
+        user_input = get_input("test")
+        inputs = {"user_input": user_input}
+        TravelSurpriseAi().crew().test(n_iterations=2, eval_llm="gpt-4o", inputs=inputs)
+    except Exception as e:
+        raise Exception(f"An error occurred while testing the crew: {e}")
+
+def replay_default():
+    """Wrapper function for project.scripts - replays last task"""
+    try:
+        # You would need to specify an actual task_id here
+        print("❌ Replay requires a task_id. Use: python -m src.travel_surprise_crew.main replay <task_id>")
+    except Exception as e:
+        raise Exception(f"An error occurred while replaying the crew: {e}")
+
+def list_inputs():
+    """Wrapper function for project.scripts - lists available inputs"""
+    return list_available_inputs()
+
+
 # Add execution logic
 if __name__ == "__main__":
     if len(sys.argv) > 1:
