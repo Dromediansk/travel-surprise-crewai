@@ -44,13 +44,136 @@ OPENAI_API_KEY=your_openai_api_key_here
 
 ## 🎯 Running the Project
 
-To start your surprise travel planning crew and begin analyzing travel preferences, run this from the root folder of your project:
+The Surprise Travel Planning Crew offers multiple ways to run and interact with the system. All commands support cost optimization by reusing existing analysis files when available.
+
+### 🚀 Basic Execution
+
+To start your surprise travel planning crew with the default configuration:
 
 ```bash
 $ crewai run
 ```
 
-This command initializes the Surprise Travel Planning Crew, assembling the specialized agents and assigning them travel planning tasks as defined in your configuration.
+Or use the Python module directly:
+
+```bash
+$ python -m src.travel_surprise_crew.main run
+```
+
+### 📋 Available Commands
+
+#### **run** - Execute Travel Planning
+
+```bash
+# Run with default travel scenario (couple from Kosice)
+$ python -m src.travel_surprise_crew.main run
+
+# Run with specific travel scenario
+$ python -m src.travel_surprise_crew.main run solo_adventure
+$ python -m src.travel_surprise_crew.main run family_vacation
+$ python -m src.travel_surprise_crew.main run luxury_romantic
+$ python -m src.travel_surprise_crew.main run business_weekend
+```
+
+#### **inputs** - View Available Travel Scenarios
+
+```bash
+# List all available travel input configurations
+$ python -m src.travel_surprise_crew.main inputs
+```
+
+#### **train** - Train the Crew
+
+```bash
+# Train the crew with specified iterations and output file
+$ python -m src.travel_surprise_crew.main train <n_iterations> <filename>
+```
+
+#### **test** - Test Crew Performance
+
+```bash
+# Test the crew with evaluation metrics
+$ python -m src.travel_surprise_crew.main test <n_iterations> <eval_llm>
+```
+
+#### **replay** - Replay Previous Execution
+
+```bash
+# Replay a specific task from previous execution
+$ python -m src.travel_surprise_crew.main replay <task_id>
+```
+
+### 🎭 Travel Scenarios
+
+The system includes pre-configured travel scenarios for different types of trips:
+
+#### **default** - Romantic Anniversary Trip
+
+- **Budget**: €2000 total
+- **Duration**: 4-5 days
+- **Group**: Couple (2 people)
+- **Style**: Comfortable but authentic experiences
+- **Focus**: Photography, cuisine, cultural experiences
+- **From**: Kosice, Slovakia
+
+#### **family_vacation** - Family Adventure
+
+- **Budget**: €3500 total
+- **Duration**: 7 days
+- **Group**: Family of 4 (2 adults, 2 children)
+- **Style**: Child-friendly and educational
+- **Focus**: Theme parks, beaches, interactive museums
+- **From**: Prague, Czech Republic
+
+#### **solo_adventure** - Backpacker Experience
+
+- **Budget**: €1200 total
+- **Duration**: 5-6 days
+- **Group**: Solo female traveler
+- **Style**: Social backpacker with safety focus
+- **Focus**: Adventure sports, culture, meeting people
+- **From**: Bratislava, Slovakia
+
+#### **luxury_romantic** - High-End Getaway
+
+- **Budget**: €5000 total
+- **Duration**: 3-4 days
+- **Group**: Couple
+- **Style**: Luxury and exclusive experiences
+- **Focus**: Fine dining, spas, wine tasting
+- **From**: Vienna, Austria
+
+#### **business_weekend** - Efficient City Break
+
+- **Budget**: €1800 total
+- **Duration**: 2-3 days
+- **Group**: Solo business traveler
+- **Style**: Efficient with leisure blend
+- **Focus**: Networking, quality dining, easy transport
+- **From**: Munich, Germany
+
+### 💰 Cost Optimization
+
+The system automatically detects existing analysis files and reuses them to save on AI costs:
+
+- **Existing Files Found**: Loads previous analysis without AI calls
+- **Missing Files**: Runs only necessary AI agents
+- **Fresh Analysis**: Delete files in `output/` folder to force new analysis
+
+### 📁 Output Files
+
+All analysis results are saved in the `output/` directory:
+
+- `travel_profile_analysis.md` - Detailed traveler personality and preferences
+- `destination_recommendations.md` - Curated destination suggestions and itineraries
+
+### 📝 Custom Travel Inputs
+
+You can easily customize travel preferences by editing `src/travel_surprise_crew/inputs.py`:
+
+1. **Modify existing scenarios** in the file
+2. **Add new scenarios** to `ALTERNATIVE_INPUTS`
+3. **Change the default scenario** by updating `DEFAULT_TRAVEL_INPUT`
 
 ### 📝 Example Usage
 
