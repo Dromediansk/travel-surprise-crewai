@@ -1,0 +1,75 @@
+analyze_travel_profile:
+  description: >
+    Analyze the following user travel information and create a comprehensive travel profile:
+
+    User Input: {user_input}
+
+    Your analysis should include:
+    1. Travel style and personality type assessment
+    2. Budget analysis and spending priorities breakdown
+    3. Activity preferences and interests categorization
+    4. Travel constraints and special requirements identification
+    5. Hidden preferences or desires that might not be explicitly stated
+    6. Recommended approach for creating surprise elements that would delight this traveler
+    7. Any missing information that should be gathered through follow-up questions
+
+    Be thorough, insightful, and personalized in your analysis. Look for patterns
+    in their previous travel experiences and preferences that can guide surprise
+    planning decisions.
+  expected_output: >
+    A detailed traveler profile document formatted as markdown that includes:
+
+    - **Travel Personality Assessment**: Classification of travel style and personality type
+    - **Budget Analysis**: Breakdown of budget priorities and spending preferences with percentages
+    - **Interest Profile**: Categorized list of activity preferences and interests with priority levels
+    - **Constraints & Requirements**: Any limitations, dietary restrictions, or special needs to consider
+    - **Hidden Insights**: Unstated preferences or desires you've identified from reading between the lines
+    - **Surprise Strategy**: Specific recommendations for surprise elements that would delight this traveler type
+    - **Information Gaps**: List of any missing information that should be gathered for complete planning
+
+    The profile should be comprehensive enough to guide destination selection, accommodation booking,
+    activity planning, and the creation of meaningful surprise elements. Format the output as clean
+    markdown without code block markers.
+  agent: travel_profile_analyst
+
+research_destinations:
+  description: >
+    Based on the comprehensive traveler profile analysis, research and recommend 3 unique surprise
+    destinations that perfectly match the traveler's personality, interests, budget, and constraints.
+
+    Consider the traveler profile analysis and focus on:
+    1. Destinations that align with their travel personality and interests
+    2. Budget-appropriate options within their spending constraints
+    3. Accessibility from their departure location (consider travel time and cost)
+    4. Seasonal considerations for their flexible travel dates
+    5. Unique experiences that match their surprise strategy preferences
+    6. Accommodation options that fit their style (boutique hotels, unique stays)
+    7. Cultural and culinary scenes that match their interests
+    8. Safety and practical considerations for their group size and requirements
+
+    Research lesser-known destinations that offer authentic experiences while meeting all their
+    stated preferences and requirements. Prioritize destinations that offer the surprise elements
+    they're seeking while avoiding cliché tourist traps.
+  expected_output: >
+    A comprehensive destination research report formatted as markdown that includes:
+
+    **For each of the 3 recommended destinations:**
+    - **Destination Name & Overview**: Brief introduction and why it's perfect for this traveler
+    - **Match Score**: How well it aligns with their profile (1-10 with explanation)
+    - **Budget Fit**: Estimated costs and budget breakdown for their duration
+    - **Unique Experiences**: Specific activities and experiences that match their interests
+    - **Accommodation Options**: 2-3 recommended unique stays that fit their preferences
+    - **Cultural & Culinary Highlights**: Food scenes and cultural experiences (vegetarian-friendly)
+    - **Surprise Elements**: Specific surprise opportunities and hidden gems
+    - **Practical Considerations**: Travel logistics from Kosice, Slovakia
+    - **Best Time to Visit**: Seasonal recommendations within their timeframe
+    - **Why This Destination**: Summary of why it's ideal for their anniversary trip
+
+    **Final Recommendation:**
+    - **Top Choice**: Which destination is the best match and why
+    - **Backup Options**: Brief explanation of the other two choices
+
+    Format as clean markdown without code block markers. Focus on authentic, personalized
+    recommendations that will create unforgettable surprise experiences.
+  agent: destination_researcher
+  context: [analyze_travel_profile]
