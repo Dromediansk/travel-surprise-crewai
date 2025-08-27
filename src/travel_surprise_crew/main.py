@@ -3,6 +3,7 @@ import sys
 import warnings
 
 from .crew import TravelSurpriseAi
+from .inputs import get_input, list_available_inputs
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -11,10 +12,13 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
-def run():
+def run(input_type="default"):
     """
     Run the travel profile analysis crew with cost optimization.
     Checks for existing output files before running AI agents.
+    
+    Args:
+        input_type (str): Type of input to use (default, family_vacation, solo_adventure, etc.)
     """
     print("🚀 Starting travel profile analysis...")
     print("=" * 50)
@@ -68,20 +72,8 @@ def run():
         print("-" * 50)
     
     # Example user input for travel profile analysis
-    user_input = """
-    Budget: 2000 euro total
-    Duration: 4-5 days
-    Interests: Photography, local cuisine, cultural experiences, history
-    Travel style: Comfortable but authentic experiences
-    Departure location: Kosice, Slovakia
-    Travel dates: Flexible within next 3 months
-    Group size: Couple (2 people)
-    Special requirements: Surprise element essential, no extreme sports, prefer unique accommodations
-    Previous trips: Malaga, Valencia, Barcelona, Nice - loved the food scenes
-    Accommodation preference: Boutique hotels or unique local stays
-    Dietary restrictions: Vegetarian-friendly options needed
-    Additional notes: Anniversary trip, want something romantic but not cliché
-    """
+    user_input = get_input(input_type)
+    print(f"📝 Using input type: {input_type}")
     
     inputs = {
         'user_input': user_input
@@ -105,14 +97,7 @@ def train():
     """
     Train the crew for a given number of iterations.
     """
-    user_input = """
-    Budget: $2000
-    Duration: 4 days
-    Interests: Art, museums, coffee culture
-    Travel style: Budget-conscious but quality experiences
-    Departure location: Los Angeles
-    Group size: Solo traveler
-    """
+    user_input = get_input("training")
     
     inputs = {
         "user_input": user_input
@@ -137,14 +122,7 @@ def test():
     """
     Test the crew execution and returns the results.
     """
-    user_input = """
-    Budget: $1500
-    Duration: 4-5 days
-    Interests: Nature, hiking, wellness
-    Travel style: Adventure but comfortable
-    Departure location: Kosice, Slovakia
-    Group size: Couple
-    """
+    user_input = get_input("test")
     
     inputs = {
         "user_input": user_input
@@ -163,7 +141,9 @@ if __name__ == "__main__":
         command = sys.argv[1]
         
         if command == "run":
-            run()
+            # Check if input type is specified
+            input_type = sys.argv[2] if len(sys.argv) > 2 else "default"
+            run(input_type)
         elif command == "train":
             if len(sys.argv) < 4:
                 print("Usage: python main.py train <n_iterations> <filename>")
@@ -179,11 +159,15 @@ if __name__ == "__main__":
                 print("Usage: python main.py test <n_iterations> <eval_llm>")
                 sys.exit(1)
             test()
+        elif command == "inputs" or command == "list-inputs":
+            list_available_inputs()
         else:
             print(f"❌ Unknown command: {command}")
-            print("Available commands: run, train, replay, test")
+            print("Available commands: run, train, replay, test, inputs")
+            print("💡 Use 'inputs' to see available input configurations")
             sys.exit(1)
     else:
         # Default to run if no command is provided
         print("No command provided. Running default 'run' command...")
+        print("💡 Use 'python main.py inputs' to see available input configurations")
         run()
